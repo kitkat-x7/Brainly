@@ -1,0 +1,44 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @default(autoincrement()) @id
+  email String @unique 
+  password String
+  name String
+  phone_number String
+  status Boolean @default(true)
+  share Boolean @default(false)
+  content Content[]
+}
+model Content{
+  id Int @default(autoincrement()) @id
+  useremail String
+  title String
+  type String
+  link String @unique
+  description String
+  user User @relation(fields: [useremail], references: [email], onDelete: Cascade)
+  tag Contentandtag[]
+}
+
+model Tag{
+  tag String @unique
+  content Contentandtag[]
+}
+
+model Contentandtag{
+  contentid Int
+  tagname String 
+  content Content @relation(fields: [contentid], references: [id],onDelete: Cascade)
+  tag Tag @relation(fields: [tagname], references: [tag],onDelete: Cascade)
+  @@id(name:"contenttagid", [contentid, tagname]) 
+}
+
