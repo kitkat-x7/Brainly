@@ -7,25 +7,19 @@ app.use(cookieParser());
 import dotenv from 'dotenv'; 
 dotenv.config(); 
 
-import register from "./routes/user/register";
-import login from "./routes/user/login";
-import profile from "./routes/user/profile";
-import logout from "./routes/user/logout";
-import content from "./routes/content/content";
-import quicklinks from "./routes/Links/Quick_links";
-import serach from "./routes/Search/Query_Search";
-import search_tags from "./routes/Search/Search_by_tags";
+import Auth from "./routes/user/Auth/routes";
+import profile from "./routes/user/Profile/routes";
+import content from "./routes/content/routing";
+import quicklinks from "./routes/Links/routing";
+import serach from "./routes/Search/routing";
 
-app.use("/api/v1/user/register",register);
-app.use("/api/v1/user/login",login);
-app.use("/api/v1/user/logout",logout);
-app.use("/api/v1/user/profile",profile);
-app.use("/api/v1/user/content",content);
-app.use("/api/v1/user/links",quicklinks);
-app.use("/api/v1/user/search/",serach);
-app.use("/api/v1/user/search/tag",search_tags);
+app.use("/api/v2/user/",Auth);
+app.use("/api/v2/user/profile",profile);
+app.use("/api/v2/user/content",content);
+app.use("/api/v2/user/links",quicklinks);
+app.use("/api/v2/user/search/",serach);
 
-app.get("/api/v1/user/home",(req,res)=>{
+app.get("/api/v2/user/home",(req,res)=>{
     res.json("Welcome");
 });
 

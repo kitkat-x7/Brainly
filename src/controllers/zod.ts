@@ -19,6 +19,14 @@ export const UserSchema=z.object({
     .max(10,{ message: "Name must be at atmost 10 char longs" }),
 });
 
+export const UpdatedUserSchema=z.object({
+    name:z.string({message:"Name should be a string"})
+        .min(9,{ message: "Name must be at least 9 char longs" })
+        .max(100,{ message: "Name must be at atmost 100 char longs" }),
+    phone_number:z.string({message:"Number should be a string"})
+    .min(10,{ message: "Name must be at least 10 char longs" })
+    .max(10,{ message: "Name must be at atmost 10 char longs" }),
+});
 
 export const LoginSchema=z.object({
     email:z.string({ message: "Email must be a string" })
